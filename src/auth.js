@@ -8,6 +8,10 @@ var AvailabilityAuth = (function () {
 
   function init() {
     if (msalInstance) return msalInstance;
+    if (typeof msal === "undefined" || !msal.PublicClientApplication) {
+      throw new Error("Sign-in library (MSAL) has not loaded yet. " +
+        "Check your internet connection and that the page can reach alcdn.msauth.net.");
+    }
     msalInstance = new msal.PublicClientApplication({
       auth: {
         clientId: cfg.CLIENT_ID,
@@ -22,9 +26,16 @@ var AvailabilityAuth = (function () {
     return msalInstance;
   }
 
+  // Safe check used at startup: returns null instead of throwing if MSAL
+  // isn't loaded, so the UI can still render.
   function getAccount() {
-    var accts = init().getAllAccounts();
-    return accts && accts.length ? accts[0] : null;
+    if (typeof msal === "undefined" || !msal.PublicClientApplication) return null;
+    try {
+      var accts = init().getAllAccounts();
+      return accts && accts.length ? accts[0] : null;
+    } catch (e) {
+      return null;
+    }
   }
 
   // Try silent token first; fall back to popup.

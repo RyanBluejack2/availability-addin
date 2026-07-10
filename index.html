@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calendar Availability</title>
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
+  <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.39.0/js/msal-browser.min.js"></script>
+  <script type="text/javascript">
+    if (typeof msal === 'undefined') {
+      document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.39.0/js/msal-browser.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+  </script>
   <link rel="stylesheet" href="src/styles.css"/>
 </head>
 <body>
