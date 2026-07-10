@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendar Availability</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
+  <link rel="stylesheet" href="src/styles.css"/>
+</head>
+<body>
+  <div id="app">
+    <h1>Calendar Availability</h1>
+
+    <div id="signin-area" class="hidden">
+      <p class="muted">Sign in to read your calendar.</p>
+      <button id="btnSignIn" class="primary">Sign in</button>
+    </div>
+
+    <div id="main-area" class="hidden">
+      <div class="field">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate"/>
+      </div>
+      <div class="field">
+        <label for="endDate">Stop Date</label>
+        <input type="date" id="endDate"/>
+      </div>
+      <div class="field">
+        <label for="startTime">Start Time</label>
+        <input type="time" id="startTime" value="10:00"/>
+      </div>
+      <div class="field">
+        <label for="endTime">End Time</label>
+        <input type="time" id="endTime" value="16:00"/>
+      </div>
+      <div class="field">
+        <label for="timeZone">Time Zone</label>
+        <select id="timeZone"></select>
+      </div>
+      <div class="field">
+        <label for="minGap">Min gap (mins)</label>
+        <input type="number" id="minGap" value="15" min="1" max="240"/>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="tentativeBusy"/> Treat tentative as busy</label>
+        <label><input type="checkbox" id="includeWeekends"/> Include weekends</label>
+      </div>
+
+      <button id="btnGenerate" class="primary">Generate</button>
+
+      <div id="status" class="status"></div>
+
+      <textarea id="output" readonly placeholder="Your availability will appear here..."></textarea>
+
+      <div class="btn-row">
+        <button id="btnCopyText">Copy as text</button>
+        <button id="btnCopyHtml">Copy as bullets</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/config.js"></script>
+  <script src="src/auth.js"></script>
+  <script src="src/graph.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
